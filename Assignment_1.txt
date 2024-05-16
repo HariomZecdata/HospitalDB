@@ -1,0 +1,61 @@
+                                          SQL QUERY
+
+
+
+1.
+select first_name , count(patients_id) 
+from patients GROUP BY fisrname HAVING COUNT(patients_id)=1;
+--------------------------------------------------------------
+
+2.
+SELECT first_name , last_name 
+from patients where allergies  is null;
+
+---------------------------------------------------------------
+
+3.
+select attending_doctor_id , COUNT(*) as attending_patients 
+from admissions GROUP BY attending_doctor_id;
+---------------------------------------------------------------
+
+4.
+select
+    SUM(case when gender = 'Male' then 1 else 0 end) As male_patients,
+    SUM(case when gender = 'Female' then 1 else 0 end) As female_patients
+from
+    patients;
+
+---------------------------------------------------------------
+
+5.
+select temp.city, temp.number_of_patients
+from (
+    select city, COUNT(patient_id) as number_of_patients 
+    from patients 
+    group by city
+) as temp
+ORDER BY temp.number_of_patients ASC, temp.city ASC;
+
+-------------------------------------------------------------
+
+6.
+select
+  DISTINCT YEAR(birth_date) AS birth_year
+FROM patients
+ORDER BY birth_year;
+
+------------------------------------------------------------------
+
+7.
+select max(wieght)-min(weight) as difference_wieght 
+from patients where lastname='Maroni';
+
+-----------------------------------------------------------------
+
+8.
+SELECT first_name, last_name, COUNT(*) AS number_of_duplicates
+FROM patients
+GROUP BY first_name, last_name
+HAVING COUNT(*) > 1;
+
+----------------------------------------------------------------------
